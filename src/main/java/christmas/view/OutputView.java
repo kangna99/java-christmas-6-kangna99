@@ -14,16 +14,17 @@ import christmas.order.Order;
 import christmas.order.OrderDetails;
 
 public class OutputView {
+    public void printDetails(int visitDate) {
+        System.out.printf(EVENT_MESSAGE, visitDate);
+        System.out.println();
+        System.out.println();
+    }
+
     public void printOrder(OrderDetails orderDetails) {
         System.out.println(ORDERED_MENU);
         for (Order order : orderDetails.getOrderDetails()) {
             System.out.println(order.getName() + " " + order.getCount() + "개");
         }
-        System.out.println();
-    }
-
-    public void printDetails() {
-        System.out.println(EVENT_MESSAGE);
         System.out.println();
     }
 

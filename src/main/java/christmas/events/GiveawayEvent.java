@@ -4,10 +4,10 @@ import static christmas.Menu.CHAMPAGNE;
 
 import christmas.Customer;
 
-public class GiveawayDiscountEvent {
+public class GiveawayEvent {
     private static final int MINIMUM_APPLICABLE_AMOUNT = 10_000;
 
-    private boolean isApplicable(Customer customer) {
+    public boolean isApplicable(Customer customer) {
         return customer.getOrderDetails().calculateTotalPrice() >= MINIMUM_APPLICABLE_AMOUNT;
     }
 

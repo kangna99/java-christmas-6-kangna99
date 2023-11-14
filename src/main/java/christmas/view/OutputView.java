@@ -34,8 +34,9 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printGiveAwayMenu() {
+    public void printGiveAwayMenu(String string) {
         System.out.println(GIVEAWAY_MENU);
+        System.out.println(string);
         System.out.println();
 
     }

@@ -15,7 +15,7 @@ public class Controller {
         this.inputView = inputView;
         this.outputView = outputView;
         customer = new Customer();
-        eventPlanner = new EventPlanner();
+        eventPlanner = new EventPlanner(customer);
     }
 
     public void run() {
@@ -26,10 +26,10 @@ public class Controller {
         outputView.printDetails();
         outputView.printOrder(customer.getOrderDetails());
         outputView.printTotalPriceBeforeDiscount(customer.getOrderDetails());
-        outputView.printGiveAwayMenu();
-        outputView.printBenefitDetails(eventPlanner.getDiscountAmounts(customer));
-        outputView.printTotalBenefitPrice(eventPlanner.getTotalBenefitPrice(customer));
-        outputView.printTotalPriceAfterDiscount(eventPlanner.getTotalPriceAfterDiscount(customer));
+        outputView.printGiveAwayMenu(eventPlanner.getTotalGiveAway());
+        outputView.printBenefitDetails(eventPlanner.getDiscountAmounts());
+        outputView.printTotalBenefitPrice(eventPlanner.getTotalBenefitPrice());
+        outputView.printTotalPriceAfterDiscount(eventPlanner.getTotalPriceAfterDiscount());
         outputView.printDecemberEventBadge();
     }
 }

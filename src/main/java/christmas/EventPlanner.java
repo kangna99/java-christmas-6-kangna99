@@ -2,7 +2,7 @@ package christmas;
 
 import christmas.events.ChristmasDDayDiscountEvent;
 import christmas.events.DiscountEvent;
-import christmas.events.GiveawayDiscountEvent;
+import christmas.events.GiveawayEvent;
 import christmas.events.SpecialDiscountEvent;
 import christmas.events.WeekdayDiscountEvent;
 import christmas.events.WeekendDiscountEvent;
@@ -13,16 +13,20 @@ import java.util.Map;
 
 public class EventPlanner {
     private List<DiscountEvent> discountEvents;
+    private GiveawayEvent giveawayEvent;
+    private Customer customer;
 
-    public EventPlanner() {
+    public EventPlanner(Customer customer) {
+        this.customer = customer;
         this.discountEvents = new ArrayList<>();
         discountEvents.add(new ChristmasDDayDiscountEvent());
         discountEvents.add(new WeekdayDiscountEvent());
         discountEvents.add(new WeekendDiscountEvent());
         discountEvents.add(new SpecialDiscountEvent());
+        this.giveawayEvent = new GiveawayEvent();
     }
 
-    public Map<DiscountEvent, Integer> getDiscountAmounts(Customer customer) {
+    public Map<DiscountEvent, Integer> getDiscountAmounts() {
         Map<DiscountEvent, Integer> discountAmounts = new HashMap<>();
 
         for (DiscountEvent discountEvent : discountEvents) {
@@ -35,23 +39,29 @@ public class EventPlanner {
         return discountAmounts;
     }
 
-    private int getTotalDisCounts(Customer customer) {
-        Map<DiscountEvent, Integer> discountAmounts = getDiscountAmounts(customer);
+    private int getTotalDisCounts() {
+        Map<DiscountEvent, Integer> discountAmounts = getDiscountAmounts();
         return discountAmounts.values().stream()
                 .mapToInt(Integer::intValue)
                 .sum();
     }
 
-    private int getTotalGiveawayPrice(Customer customer) {
-        GiveawayDiscountEvent giveawayEvent = new GiveawayDiscountEvent();
+    public String getTotalGiveAway() {
+        if (giveawayEvent.isApplicable(customer)) {
+            return "샴페인 1개";
+        }
+        return "없음";
+    }
+
+    private int getTotalGiveawayPrice() {
         return giveawayEvent.calculateBenefitAmount(customer);
     }
 
-    public int getTotalBenefitPrice(Customer customer) {
-        return getTotalDisCounts(customer) + getTotalGiveawayPrice(customer);
+    public int getTotalBenefitPrice() {
+        return getTotalDisCounts() + getTotalGiveawayPrice();
     }
 
-    public int getTotalPriceAfterDiscount(Customer customer) {
-        return customer.getOrderDetails().calculateTotalPrice() - getTotalDisCounts(customer);
+    public int getTotalPriceAfterDiscount() {
+        return customer.getOrderDetails().calculateTotalPrice() - getTotalDisCounts();
     }
 }

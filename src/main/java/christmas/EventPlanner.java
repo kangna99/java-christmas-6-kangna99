@@ -7,20 +7,20 @@ import christmas.event.GiveawayEvent;
 import christmas.event.SpecialDiscountEvent;
 import christmas.event.WeekdayDiscountEvent;
 import christmas.event.WeekendDiscountEvent;
+import christmas.menu.Menu;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class EventPlanner {
     public GiveawayEvent giveawayEvent;
     private List<DiscountEvent> discountEvents;
     private Customer customer;
-    private int totalPrice;
 
     public EventPlanner(Customer customer) {
         this.customer = customer;
-        this.totalPrice = customer.getOrderDetails().calculateTotalPrice();
         this.discountEvents = new ArrayList<>();
         discountEvents.add(new ChristmasDDayDiscountEvent());
         discountEvents.add(new WeekdayDiscountEvent());
@@ -53,12 +53,38 @@ public class EventPlanner {
         return giveawayEvent.calculateBenefitAmount(customer);
     }
 
+    public String getGiveaway(Customer customer) {
+        Map<Menu, Integer> giveaway = giveawayEvent.giveaway(customer);
+
+        if (giveaway.isEmpty()) {
+            return "없음\n";
+        }
+        return giveaway.entrySet().stream()
+                .map(entry -> String.format("%s %d개%n", entry.getKey().getName(), entry.getValue()))
+                .collect(Collectors.joining());
+    }
+
     public int getTotalBenefitPrice() {
         return getTotalDisCounts() + getTotalGiveawayPrice();
     }
 
     public int getTotalPriceAfterDiscount() {
-        return totalPrice - getTotalDisCounts();
+        return customer.getOrderDetails().calculateTotalPrice() - getTotalDisCounts();
+    }
+
+    public String getDiscountDetails() {
+        Map<DiscountEvent, Integer> discountAmounts = getDiscountAmounts();
+        return discountAmounts.entrySet().stream()
+                .map(entry -> String.format("%s: -%,d원", entry.getKey().name(), entry.getValue()))
+                .collect(Collectors.joining("\n", "", ""));
+    }
+
+    public String getGiveawayDetails() {
+        Map<Menu, Integer> giveaway = giveawayEvent.giveaway(customer);
+        if (giveaway.isEmpty()) {
+            return "";
+        }
+        return String.format("%s: -%,d원\n", giveawayEvent.eventName(), giveawayEvent.item().getPrice());
     }
 
     public Badge awardBadge() {

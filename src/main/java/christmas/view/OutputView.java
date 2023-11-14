@@ -10,11 +10,8 @@ import static christmas.constants.ResultMessage.TOTAL_PRICE_AFTER_DISCOUNT;
 import static christmas.constants.ResultMessage.TOTAL_PRICE_BEFORE_DISCOUNT;
 
 import christmas.event.Badge;
-import christmas.event.DiscountEvent;
-import christmas.event.GiveawayEvent;
 import christmas.order.Order;
 import christmas.order.OrderDetails;
-import java.util.Map;
 
 public class OutputView {
     public void printOrder(OrderDetails orderDetails) {
@@ -36,33 +33,28 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printGiveAwayMenu(GiveawayEvent giveaway) {
+    public void printGiveAwayMenu(String giveaway) {
         System.out.println(GIVEAWAY_MENU);
-        System.out.printf("%s %d개%n", giveaway.item().getName(), giveaway.itemCount());
-        System.out.println();
-
+        System.out.println(giveaway);
     }
 
-    public void printBenefitDetails(Map<DiscountEvent, Integer> discountAmounts, GiveawayEvent giveaway) {
+    public void printBenefitDetails(String discountAmounts, String giveaway) {
         System.out.println(BENEFIT_DETAILS);
-        printDiscountDetails(discountAmounts);
-        printGiveawayDetails(giveaway);
-        System.out.println();
+        if (discountAmounts.isEmpty() && giveaway.isEmpty()) {
+            System.out.println("없음\n");
+            return;
+        }
+        System.out.println(discountAmounts);
+        System.out.println(giveaway);
     }
-
-    private void printDiscountDetails(Map<DiscountEvent, Integer> discountAmounts) {
-        discountAmounts.entrySet().stream()
-                .forEach(entry -> System.out.printf("%s: -%,d원%n", entry.getKey().name(), entry.getValue()));
-    }
-
-    private void printGiveawayDetails(GiveawayEvent giveaway) {
-        System.out.printf("%s: -%,d원%n", giveaway.eventName(), giveaway.item().getPrice());
-    }
-
 
     public void printTotalBenefitPrice(int price) {
         System.out.println(TOTAL_BENEFIT_PRICE);
-        System.out.printf("-%,d원\n", price);
+        if (price != 0) {
+            System.out.printf("-%,d원\n", price);
+            return;
+        }
+        System.out.printf("%,d원\n", price);
         System.out.println();
     }
 

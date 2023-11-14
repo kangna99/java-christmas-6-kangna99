@@ -59,7 +59,6 @@ public class InputView {
 
     private void validateOrder(String order) {
         validateNotBlank(order);
-        //validateNotEndsWithDelimiter(order);
         validateFormat(order);
     }
 

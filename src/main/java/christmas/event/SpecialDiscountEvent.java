@@ -7,6 +7,10 @@ public class SpecialDiscountEvent implements DiscountEvent {
 
     @Override
     public boolean isApplicable(Customer customer) {
+        return DiscountEvent.super.isApplicable(customer) && additionalCondition(customer);
+    }
+
+    private boolean additionalCondition(Customer customer) {
         int dayOfMonth = customer.getVisitDate();
         return dayOfMonth == 3 || dayOfMonth == 10 || dayOfMonth == 17 || dayOfMonth == 24 || dayOfMonth == 25
                 || dayOfMonth == 31;

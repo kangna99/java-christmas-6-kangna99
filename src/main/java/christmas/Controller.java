@@ -27,8 +27,8 @@ public class Controller {
         outputView.printDetails();
         outputView.printOrder(customer.getOrderDetails());
         outputView.printTotalPriceBeforeDiscount(customer.getOrderDetails());
-        outputView.printGiveAwayMenu(eventPlanner.giveawayEvent);
-        outputView.printBenefitDetails(eventPlanner.getDiscountAmounts(), eventPlanner.giveawayEvent);
+        outputView.printGiveAwayMenu(eventPlanner.getGiveaway(customer));
+        outputView.printBenefitDetails(eventPlanner.getDiscountDetails(), eventPlanner.getGiveawayDetails());
         outputView.printTotalBenefitPrice(eventPlanner.getTotalBenefitPrice());
         outputView.printTotalPriceAfterDiscount(eventPlanner.getTotalPriceAfterDiscount());
         outputView.printDecemberEventBadge(eventPlanner.awardBadge());

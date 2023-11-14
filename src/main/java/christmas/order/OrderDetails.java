@@ -7,7 +7,6 @@ import static christmas.constants.ErrorMessage.formatErrorWithRetry;
 
 import christmas.menu.Category;
 import christmas.menu.Menu;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +17,7 @@ public class OrderDetails {
 
     public OrderDetails(List<Order> orderDetails) {
         this.orderDetails = orderDetails;
+        initCategoryCount();
         validate();
         calculateCategoryCount();
     }
@@ -41,12 +41,11 @@ public class OrderDetails {
     }
 
     private void validateNotOnlyBeverage() {
-        int totalNonBeverageCount = Arrays.stream(Category.values())
-                .filter(category -> category != Category.BEVERAGE)
-                .mapToInt(category -> menuCountForEachCategory.getOrDefault(category, 0))
-                .sum();
+        boolean hasOnlyBeverage = orderDetails.stream()
+                .map(order -> Menu.fromKoreanName(order.getName()))
+                .allMatch(menu -> menu.getCategory() == Category.BEVERAGE);
 
-        if (totalNonBeverageCount == 0) {
+        if (hasOnlyBeverage) {
             throw new IllegalArgumentException(formatErrorWithRetry(NOT_ALLOWED_ONLY_BEVERAGE));
         }
     }
@@ -65,7 +64,6 @@ public class OrderDetails {
     }
 
     private void calculateCategoryCount() {
-        initCategoryCount();
         orderDetails.stream()
                 .forEach(this::accumulateCategoryCount);
     }

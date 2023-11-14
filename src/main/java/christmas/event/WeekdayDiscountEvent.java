@@ -9,6 +9,10 @@ public class WeekdayDiscountEvent implements DiscountEvent {
 
     @Override
     public boolean isApplicable(Customer customer) {
+        return DiscountEvent.super.isApplicable(customer) && additionalCondition(customer);
+    }
+
+    private boolean additionalCondition(Customer customer) {
         LocalDate date = LocalDate.of(2023, 12, customer.getVisitDate());
         return date.getDayOfWeek() != DayOfWeek.FRIDAY && date.getDayOfWeek() != DayOfWeek.SATURDAY;
     }

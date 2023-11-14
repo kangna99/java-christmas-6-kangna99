@@ -8,8 +8,10 @@ import static christmas.constants.ErrorMessage.formatErrorWithRetry;
 import christmas.menu.Category;
 import christmas.menu.Menu;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class OrderDetails {
     private final List<Order> orderDetails;
@@ -29,7 +31,9 @@ public class OrderDetails {
     }
 
     private void validateDuplicated() {
-        if (orderDetails.stream().distinct().count() != orderDetails.size()) {
+        Set<String> menuNames = new HashSet<>();
+
+        if (orderDetails.stream().anyMatch(order -> !menuNames.add(order.getName()))) {
             throw new IllegalArgumentException(formatErrorWithRetry(DUPLICATED_ORDER_MENU_NAME));
         }
     }
@@ -42,7 +46,7 @@ public class OrderDetails {
 
     private void validateNotOnlyBeverage() {
         boolean hasOnlyBeverage = orderDetails.stream()
-                .map(order -> Menu.fromKoreanName(order.getName()))
+                .map(order -> Menu.called(order.getName()))
                 .allMatch(menu -> menu.getCategory() == Category.BEVERAGE);
 
         if (hasOnlyBeverage) {
@@ -69,7 +73,7 @@ public class OrderDetails {
     }
 
     private void accumulateCategoryCount(Order order) {
-        Menu menu = Menu.fromKoreanName(order.getName());
+        Menu menu = Menu.called(order.getName());
         Category category = menu.getCategory();
         int currentCount = menuCountForEachCategory.getOrDefault(category, 0);
         menuCountForEachCategory.put(category, currentCount + order.getCount());

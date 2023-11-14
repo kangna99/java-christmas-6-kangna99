@@ -18,4 +18,9 @@ public class WeekdayDiscountEvent implements DiscountEvent {
         int dessertCount = customer.getOrderDetails().getDessertCount();
         return DISCOUNT_AMOUNT_PER_DESSERT * dessertCount;
     }
+
+    @Override
+    public String name() {
+        return "평일 할인";
+    }
 }

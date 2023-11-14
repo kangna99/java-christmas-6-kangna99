@@ -16,4 +16,9 @@ public class SpecialDiscountEvent implements DiscountEvent {
     public int calculateDiscount(Customer customer) {
         return DISCOUNT_AMOUNT;
     }
+
+    @Override
+    public String name() {
+        return "특별 할인";
+    }
 }

@@ -19,4 +19,9 @@ public class ChristmasDDayDiscountEvent implements DiscountEvent {
         int daysFromStart = customer.getVisitDate() - START_DAY;
         return INITIAL_DISCOUNT + daysFromStart * DAILY_INCREASE;
     }
+
+    @Override
+    public String name() {
+        return "크리스마스 디데이 할인";
+    }
 }

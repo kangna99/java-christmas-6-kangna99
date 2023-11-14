@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 public class EventPlanner {
+    public GiveawayEvent giveawayEvent;
     private List<DiscountEvent> discountEvents;
-    private GiveawayEvent giveawayEvent;
     private Customer customer;
 
     public EventPlanner(Customer customer) {
@@ -46,11 +46,12 @@ public class EventPlanner {
                 .sum();
     }
 
-    public String getTotalGiveAway() {
+    public Map<GiveawayEvent, Integer> getTotalGiveAway() {
+        Map<GiveawayEvent, Integer> giveaway = new HashMap<>();
         if (giveawayEvent.isApplicable(customer)) {
-            return "샴페인 1개";
+            giveaway.put(giveawayEvent, giveawayEvent.itemCount());
         }
-        return "없음";
+        return giveaway;
     }
 
     private int getTotalGiveawayPrice() {

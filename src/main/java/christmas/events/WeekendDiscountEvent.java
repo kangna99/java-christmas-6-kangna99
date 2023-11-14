@@ -18,4 +18,9 @@ public class WeekendDiscountEvent implements DiscountEvent {
         int mainDishCount = customer.getOrderDetails().getMainDishCount();
         return DISCOUNT_AMOUNT_PER_MAIN_DISH * mainDishCount;
     }
+
+    @Override
+    public String name() {
+        return "주말 할인";
+    }
 }

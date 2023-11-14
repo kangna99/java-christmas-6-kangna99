@@ -20,29 +20,12 @@ public class OrderDetails {
         }
     }
 
-    //    private void calculateCount() {
-////        initCategoryCount();
-////        orderDetails.stream()
-////                .map(order -> Menu.fromKoreanName(order.getName()))
-////                .forEach(this::accumulateCategoryCount);
-//        initCategoryCount();
-//        orderDetails.stream()
-//                .map(order -> Menu.fromKoreanName(order.getName()))
-//                .forEach(order -> accumulateCategoryCount(order, order.getCount()));
-//    }
-//
     private void initCategoryCount() {
         menuCountForEachCategory = new HashMap<>();
         for (Category category : Category.values()) {
             menuCountForEachCategory.put(category, 0);
         }
     }
-//
-//    private void accumulateCategoryCount(Menu menu, int count) {
-//        Category category = menu.getCategory();
-//        int currentCount = menuCountForEachCategory.getOrDefault(category, 0);
-//        menuCountForEachCategory.put(category, currentCount + count);
-//    }
 
     private void calculateCount() {
         initCategoryCount();

@@ -52,8 +52,9 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printTotalPriceAfterDiscount() {
+    public void printTotalPriceAfterDiscount(int price) {
         System.out.println(TOTAL_PRICE_AFTER_DISCOUNT);
+        System.out.printf("%,d원\n", price);
         System.out.println();
     }
 

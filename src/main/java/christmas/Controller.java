@@ -29,7 +29,7 @@ public class Controller {
         outputView.printGiveAwayMenu();
         outputView.printBenefitDetails(eventPlanner.getDiscountAmounts(customer));
         outputView.printTotalBenefitPrice(eventPlanner.getTotalBenefitPrice(customer));
-        outputView.printTotalPriceAfterDiscount();
+        outputView.printTotalPriceAfterDiscount(eventPlanner.getTotalPriceAfterDiscount(customer));
         outputView.printDecemberEventBadge();
     }
 }

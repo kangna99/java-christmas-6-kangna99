@@ -50,4 +50,8 @@ public class EventPlanner {
     public int getTotalBenefitPrice(Customer customer) {
         return getTotalDisCounts(customer) + getTotalGiveawayPrice(customer);
     }
+
+    public int getTotalPriceAfterDiscount(Customer customer) {
+        return customer.getOrderDetails().calculateTotalPrice() - getTotalDisCounts(customer);
+    }
 }

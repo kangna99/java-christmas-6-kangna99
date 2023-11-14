@@ -72,8 +72,4 @@ public class Order {
     public int getCount() {
         return count;
     }
-
-//    public void add(String menuName, int count) {
-//        orderDetails.put(Menu.valueOf(menuName), count);
-//    }
 }

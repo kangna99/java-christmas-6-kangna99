@@ -11,6 +11,7 @@ import static christmas.constants.ResultMessage.TOTAL_PRICE_BEFORE_DISCOUNT;
 
 import christmas.Order;
 import christmas.OrderDetails;
+import christmas.events.Badge;
 import christmas.events.DiscountEvent;
 import christmas.events.GiveawayEvent;
 import java.util.Map;
@@ -71,8 +72,8 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printDecemberEventBadge() {
+    public void printDecemberEventBadge(Badge badge) {
         System.out.println(DECEMBER_EVENT_BADGE);
-        System.out.println();
+        System.out.println(badge.getName());
     }
 }

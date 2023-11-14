@@ -1,5 +1,6 @@
 package christmas;
 
+import christmas.events.Badge;
 import christmas.events.ChristmasDDayDiscountEvent;
 import christmas.events.DiscountEvent;
 import christmas.events.GiveawayEvent;
@@ -64,5 +65,9 @@ public class EventPlanner {
 
     public int getTotalPriceAfterDiscount() {
         return customer.getOrderDetails().calculateTotalPrice() - getTotalDisCounts();
+    }
+
+    public Badge awardBadge() {
+        return Badge.selectBadge(getTotalBenefitPrice());
     }
 }

@@ -30,6 +30,6 @@ public class Controller {
         outputView.printBenefitDetails(eventPlanner.getDiscountAmounts(), eventPlanner.giveawayEvent);
         outputView.printTotalBenefitPrice(eventPlanner.getTotalBenefitPrice());
         outputView.printTotalPriceAfterDiscount(eventPlanner.getTotalPriceAfterDiscount());
-        outputView.printDecemberEventBadge();
+        outputView.printDecemberEventBadge(eventPlanner.awardBadge());
     }
 }

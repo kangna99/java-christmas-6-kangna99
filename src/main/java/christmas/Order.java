@@ -11,10 +11,14 @@ import java.util.regex.Pattern;
 
 public class Order {
     private static final String WHITESPACE_REGEX = "\\s";
+    private String menuName;
+    private int count;
 
     public Order(String menuName, String count) {
         validateName(menuName);
         validateCount(count);
+        this.menuName = menuName;
+        this.count = Integer.parseInt(count);
     }
 
     private void validateName(String name) {
@@ -59,6 +63,14 @@ public class Order {
         if (!Menu.contains(name)) {
             throw new IllegalArgumentException(formatErrorWithRetry(INVALID_ORDER_MENU_NAME));
         }
+    }
+
+    public String getName() {
+        return menuName;
+    }
+
+    public int getCount() {
+        return count;
     }
 
 //    public void add(String menuName, int count) {

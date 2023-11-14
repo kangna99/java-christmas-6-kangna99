@@ -7,16 +7,17 @@ import christmas.view.OutputView;
 
 public class Controller {
     private final InputView inputView;
-//    private final OutputView outputView;
+    private final OutputView outputView;
 
     public Controller(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
-//        this.outputView = outputView;
+        this.outputView = outputView;
     }
 
     public void run() {
         System.out.println(START_MESSAGE);
         int date = inputView.readDate();
         OrderDetails orderDetails = inputView.readOrder();
+        outputView.printOrder(orderDetails);
     }
 }

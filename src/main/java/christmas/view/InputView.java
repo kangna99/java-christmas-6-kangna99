@@ -11,6 +11,7 @@ import static christmas.constants.GuideMessage.REQUEST_ORDER;
 import camp.nextstep.edu.missionutils.Console;
 import christmas.Order;
 import christmas.OrderDetails;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,12 +39,12 @@ public class InputView {
             try {
                 validateOrder(input);
                 List<String> orders = List.of(input.split(","));
-                OrderDetails orderDetails = new OrderDetails();
+                List<Order> orderDetails = new ArrayList<>();
                 orders.forEach(order -> {
                     List<String> menuDetails = List.of(order.split("-"));
                     orderDetails.add(new Order(menuDetails.get(0), menuDetails.get(1)));
                 });
-                return orderDetails;
+                return new OrderDetails(orderDetails);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }

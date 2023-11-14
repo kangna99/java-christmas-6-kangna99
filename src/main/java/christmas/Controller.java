@@ -19,5 +19,6 @@ public class Controller {
         int date = inputView.readDate();
         OrderDetails orderDetails = inputView.readOrder();
         outputView.printOrder(orderDetails);
+        outputView.printTotalPrice(orderDetails);
     }
 }

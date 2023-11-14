@@ -35,6 +35,21 @@ public enum Menu {
 //        return Arrays.stream(Menu.values())
 //                .filter(menu -> menu.name().equalsIgnoreCase(name))
 //                .findFirst()
-//                .orElseThrow(() -> new NoSuchElementException("No such Menu: " + name));
+//                .orElseThrow(NoSuchElementException::new);
 //    }
+
+    public static Menu findMenu(String name) {
+        return Arrays.stream(values())
+                .filter(menu -> menu.getName().equals(name))
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
 }

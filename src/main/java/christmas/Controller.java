@@ -23,12 +23,12 @@ public class Controller {
         int visitDate = inputView.readDate();
         OrderDetails orderDetails = inputView.readOrder();
         customer.makeOrder(visitDate, orderDetails);
-
+        outputView.printDetails();
         outputView.printOrder(customer.getOrderDetails());
         outputView.printTotalPriceBeforeDiscount(customer.getOrderDetails());
         outputView.printGiveAwayMenu();
-        outputView.printBenefitDetails();
-        outputView.printTotalBenefitPrice();
+        outputView.printBenefitDetails(eventPlanner.getDiscountAmounts(customer));
+        outputView.printTotalBenefitPrice(eventPlanner.getTotalBenefitPrice(customer));
         outputView.printTotalPriceAfterDiscount();
         outputView.printDecemberEventBadge();
     }

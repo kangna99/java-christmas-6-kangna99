@@ -65,6 +65,10 @@ public class Order {
         }
     }
 
+    public int getPrice() {
+        return Menu.fromKoreanName(menuName).getPrice() * count;
+    }
+
     public String getName() {
         return menuName;
     }

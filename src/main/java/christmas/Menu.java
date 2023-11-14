@@ -31,16 +31,9 @@ public enum Menu {
                 .anyMatch(menu -> menu.name.equalsIgnoreCase(name));
     }
 
-//    public static Menu valueOf(String name) {
-//        return Arrays.stream(Menu.values())
-//                .filter(menu -> menu.name().equalsIgnoreCase(name))
-//                .findFirst()
-//                .orElseThrow(NoSuchElementException::new);
-//    }
-
-    public static Menu findMenu(String name) {
-        return Arrays.stream(values())
-                .filter(menu -> menu.getName().equals(name))
+    public static Menu fromKoreanName(String menuName) {
+        return Arrays.stream(Menu.values())
+                .filter(menu -> menu.getName().equals(menuName))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
     }

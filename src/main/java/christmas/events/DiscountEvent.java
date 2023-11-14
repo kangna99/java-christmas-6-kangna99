@@ -1,10 +1,9 @@
 package christmas.events;
 
 import christmas.Customer;
-import java.time.LocalDate;
 
-public interface Event {
-    boolean isApplicable(LocalDate date);
+public interface DiscountEvent {
+    boolean isApplicable(Customer customer);
 
     int calculateDiscount(Customer customer);
 }

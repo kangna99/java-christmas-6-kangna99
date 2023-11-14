@@ -1,12 +1,12 @@
 package christmas;
 
-import christmas.events.Badge;
-import christmas.events.ChristmasDDayDiscountEvent;
-import christmas.events.DiscountEvent;
-import christmas.events.GiveawayEvent;
-import christmas.events.SpecialDiscountEvent;
-import christmas.events.WeekdayDiscountEvent;
-import christmas.events.WeekendDiscountEvent;
+import christmas.event.Badge;
+import christmas.event.ChristmasDDayDiscountEvent;
+import christmas.event.DiscountEvent;
+import christmas.event.GiveawayEvent;
+import christmas.event.SpecialDiscountEvent;
+import christmas.event.WeekdayDiscountEvent;
+import christmas.event.WeekendDiscountEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,9 +16,11 @@ public class EventPlanner {
     public GiveawayEvent giveawayEvent;
     private List<DiscountEvent> discountEvents;
     private Customer customer;
+    private int totalPrice;
 
     public EventPlanner(Customer customer) {
         this.customer = customer;
+        this.totalPrice = customer.getOrderDetails().calculateTotalPrice();
         this.discountEvents = new ArrayList<>();
         discountEvents.add(new ChristmasDDayDiscountEvent());
         discountEvents.add(new WeekdayDiscountEvent());
@@ -47,14 +49,6 @@ public class EventPlanner {
                 .sum();
     }
 
-    public Map<GiveawayEvent, Integer> getTotalGiveAway() {
-        Map<GiveawayEvent, Integer> giveaway = new HashMap<>();
-        if (giveawayEvent.isApplicable(customer)) {
-            giveaway.put(giveawayEvent, giveawayEvent.itemCount());
-        }
-        return giveaway;
-    }
-
     private int getTotalGiveawayPrice() {
         return giveawayEvent.calculateBenefitAmount(customer);
     }
@@ -64,7 +58,7 @@ public class EventPlanner {
     }
 
     public int getTotalPriceAfterDiscount() {
-        return customer.getOrderDetails().calculateTotalPrice() - getTotalDisCounts();
+        return totalPrice - getTotalDisCounts();
     }
 
     public Badge awardBadge() {

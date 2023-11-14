@@ -1,4 +1,4 @@
-package christmas;
+package christmas.order;
 
 import static christmas.constants.ErrorMessage.CONTAINS_WHITESPACE;
 import static christmas.constants.ErrorMessage.INVALID_ORDER_MENU_NAME;
@@ -6,6 +6,7 @@ import static christmas.constants.ErrorMessage.NOT_NUMBER;
 import static christmas.constants.ErrorMessage.NOT_POSITIVE_NUMBER;
 import static christmas.constants.ErrorMessage.formatErrorWithRetry;
 
+import christmas.menu.Menu;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

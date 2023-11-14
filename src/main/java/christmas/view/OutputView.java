@@ -9,11 +9,11 @@ import static christmas.constants.ResultMessage.TOTAL_BENEFIT_PRICE;
 import static christmas.constants.ResultMessage.TOTAL_PRICE_AFTER_DISCOUNT;
 import static christmas.constants.ResultMessage.TOTAL_PRICE_BEFORE_DISCOUNT;
 
-import christmas.Order;
-import christmas.OrderDetails;
-import christmas.events.Badge;
-import christmas.events.DiscountEvent;
-import christmas.events.GiveawayEvent;
+import christmas.event.Badge;
+import christmas.event.DiscountEvent;
+import christmas.event.GiveawayEvent;
+import christmas.order.Order;
+import christmas.order.OrderDetails;
 import java.util.Map;
 
 public class OutputView {

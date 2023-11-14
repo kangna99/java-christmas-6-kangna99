@@ -1,9 +1,9 @@
-package christmas.events;
+package christmas.event;
 
-import static christmas.Menu.CHAMPAGNE;
+import static christmas.menu.Menu.CHAMPAGNE;
 
 import christmas.Customer;
-import christmas.Menu;
+import christmas.menu.Menu;
 
 public class GiveawayEvent {
     private static final int MINIMUM_APPLICABLE_AMOUNT = 10_000;

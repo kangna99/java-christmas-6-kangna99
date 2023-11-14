@@ -1,4 +1,4 @@
-package christmas.events;
+package christmas.event;
 
 import christmas.Customer;
 

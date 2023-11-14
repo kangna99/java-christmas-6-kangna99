@@ -2,6 +2,7 @@ package christmas;
 
 import static christmas.constants.GuideMessage.START_MESSAGE;
 
+import christmas.order.OrderDetails;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 

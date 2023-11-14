@@ -1,4 +1,4 @@
-package christmas.events;
+package christmas.event;
 
 public enum Badge {
     NONE("없음"),

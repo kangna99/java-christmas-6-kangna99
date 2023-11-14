@@ -9,8 +9,8 @@ import static christmas.constants.GuideMessage.REQUEST_DATE;
 import static christmas.constants.GuideMessage.REQUEST_ORDER;
 
 import camp.nextstep.edu.missionutils.Console;
-import christmas.Order;
-import christmas.OrderDetails;
+import christmas.order.Order;
+import christmas.order.OrderDetails;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;

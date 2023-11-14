@@ -2,11 +2,16 @@ package christmas.view;
 
 import static christmas.constants.ErrorMessage.CONTAINS_WHITESPACE;
 import static christmas.constants.ErrorMessage.INVALID_DATE;
+import static christmas.constants.ErrorMessage.INVALID_ORDER_FORMAT;
 import static christmas.constants.ErrorMessage.NOT_NUMBER;
 import static christmas.constants.ErrorMessage.formatErrorWithRetry;
 import static christmas.constants.GuideMessage.REQUEST_DATE;
+import static christmas.constants.GuideMessage.REQUEST_ORDER;
 
 import camp.nextstep.edu.missionutils.Console;
+import christmas.Order;
+import christmas.OrderDetails;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,10 +21,29 @@ public class InputView {
     public int readDate() {
         while (true) {
             System.out.println(REQUEST_DATE);
-            String date = Console.readLine();
+            String input = Console.readLine();
             try {
-                validateDate(date);
-                return Integer.parseInt(date);
+                validateDate(input);
+                return Integer.parseInt(input);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    public OrderDetails readOrder() {
+        while (true) {
+            System.out.println(REQUEST_ORDER);
+            String input = Console.readLine();
+            try {
+                validateOrder(input);
+                List<String> orders = List.of(input.split(","));
+                OrderDetails orderDetails = new OrderDetails();
+                orders.forEach(order -> {
+                    List<String> menuDetails = List.of(order.split("-"));
+                    orderDetails.add(new Order(menuDetails.get(0), menuDetails.get(1)));
+                });
+                return orderDetails;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -30,6 +54,12 @@ public class InputView {
         validateNotBlank(date);
         validateInputIsNumeric(date);
         validateInputIsWithinRange(date);
+    }
+
+    private void validateOrder(String order) {
+        validateNotBlank(order);
+        //validateNotEndsWithDelimiter(order);
+        validateFormat(order);
     }
 
     private void validateNotBlank(String input) {
@@ -56,6 +86,21 @@ public class InputView {
         int date = Integer.parseInt(input);
         if (date < 1 || date > 31) {
             throw new IllegalArgumentException(formatErrorWithRetry(INVALID_DATE));
+        }
+    }
+
+    private void validateNotEndsWithDelimiter(String input) {
+        if (input.endsWith(",")) {
+            throw new IllegalArgumentException(formatErrorWithRetry(INVALID_ORDER_FORMAT));
+        }
+    }
+
+    private void validateFormat(String order) {
+        String regex = "([가-힣]+)-(\\d+)(,|$)";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(order);
+        if (!matcher.find()) {
+            throw new IllegalArgumentException(formatErrorWithRetry(INVALID_ORDER_FORMAT));
         }
     }
 }

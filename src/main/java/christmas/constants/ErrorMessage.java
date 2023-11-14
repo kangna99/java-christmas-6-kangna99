@@ -3,6 +3,7 @@ package christmas.constants;
 public class ErrorMessage {
     public static final String CONTAINS_WHITESPACE = "공백이 포함되어 있습니다.";
     public static final String NOT_NUMBER = "숫자가 아닙니다.";
+    public static final String NOT_POSITIVE_NUMBER = "1개 이상 주문해주세요.";
     public static final String INVALID_DATE = "유효하지 않은 날짜입니다.";
     public static final String INVALID_ORDER_MENU_NAME = "유효하지 않은 주문입니다.";
     public static final String INVALID_ORDER_MENU_COUNT = "유효하지 않은 주문입니다.";

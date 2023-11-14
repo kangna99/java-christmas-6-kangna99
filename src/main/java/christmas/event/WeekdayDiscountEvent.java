@@ -5,7 +5,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public class WeekdayDiscountEvent implements DiscountEvent {
-    private static final int DISCOUNT_AMOUNT_PER_DESSERT = 2023;
+    private static final int DISCOUNT_AMOUNT_PER_DESSERT = 2_023;
 
     @Override
     public boolean isApplicable(Customer customer) {

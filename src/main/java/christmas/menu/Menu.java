@@ -28,10 +28,10 @@ public enum Menu {
 
     public static boolean contains(String name) {
         return Arrays.stream(Menu.values())
-                .anyMatch(menu -> menu.name.equalsIgnoreCase(name));
+                .anyMatch(menu -> menu.name.equals(name));
     }
 
-    public static Menu fromKoreanName(String menuName) {
+    public static Menu called(String menuName) {
         return Arrays.stream(Menu.values())
                 .filter(menu -> menu.getName().equals(menuName))
                 .findFirst()

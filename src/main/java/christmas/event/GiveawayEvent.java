@@ -41,6 +41,5 @@ public class GiveawayEvent {
             return giveawayMap;
         }
         return Collections.emptyMap();
-
     }
 }

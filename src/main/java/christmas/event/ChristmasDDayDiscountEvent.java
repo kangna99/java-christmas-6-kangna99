@@ -3,8 +3,8 @@ package christmas.event;
 import christmas.Customer;
 
 public class ChristmasDDayDiscountEvent implements DiscountEvent {
-    private static final int INITIAL_DISCOUNT = 1000;
-    private static final int DAILY_INCREASE = 100;
+    private static final int INITIAL_DISCOUNT = 1_000;
+    private static final int DAILY_INCREASE_AMOUNT = 100;
     private static final int START_DAY = 1;
     private static final int END_DAY = 25;
 
@@ -20,8 +20,8 @@ public class ChristmasDDayDiscountEvent implements DiscountEvent {
 
     @Override
     public int calculateDiscount(Customer customer) {
-        int daysFromStart = customer.getVisitDate() - START_DAY;
-        return INITIAL_DISCOUNT + daysFromStart * DAILY_INCREASE;
+        int dayCount = customer.getVisitDate() - START_DAY;
+        return INITIAL_DISCOUNT + dayCount * DAILY_INCREASE_AMOUNT;
     }
 
     @Override

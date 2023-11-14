@@ -1,9 +1,9 @@
 package christmas.order;
 
 import static christmas.constants.ErrorMessage.CONTAINS_WHITESPACE;
+import static christmas.constants.ErrorMessage.INVALID_ORDER_MENU_COUNT;
 import static christmas.constants.ErrorMessage.INVALID_ORDER_MENU_NAME;
 import static christmas.constants.ErrorMessage.NOT_NUMBER;
-import static christmas.constants.ErrorMessage.NOT_POSITIVE_NUMBER;
 import static christmas.constants.ErrorMessage.formatErrorWithRetry;
 
 import christmas.menu.Menu;
@@ -12,6 +12,8 @@ import java.util.regex.Pattern;
 
 public class Order {
     private static final String WHITESPACE_REGEX = "\\s";
+    private static final int MINIMUM_ORDER_COUNT = 1;
+    private static final int MAXIMUM_ORDER_COUNT = 20;
     private String menuName;
     private int count;
 
@@ -30,7 +32,7 @@ public class Order {
     private void validateCount(String count) {
         validateNotBlank(count);
         validateInputIsNumeric(count);
-        validateInputIsPositiveNumber(count);
+        validateInputWithInRange(count);
     }
 
     private void validateNotBlank(String input) {
@@ -53,10 +55,10 @@ public class Order {
         }
     }
 
-    private void validateInputIsPositiveNumber(String input) {
+    private void validateInputWithInRange(String input) {
         int number = Integer.parseInt(input);
-        if (number < 1) {
-            throw new IllegalArgumentException(formatErrorWithRetry(NOT_POSITIVE_NUMBER));
+        if (number < MINIMUM_ORDER_COUNT || number > MAXIMUM_ORDER_COUNT) {
+            throw new IllegalArgumentException(formatErrorWithRetry(INVALID_ORDER_MENU_COUNT));
         }
     }
 
@@ -67,7 +69,7 @@ public class Order {
     }
 
     public int getPrice() {
-        return Menu.fromKoreanName(menuName).getPrice() * count;
+        return Menu.called(menuName).getPrice() * count;
     }
 
     public String getName() {

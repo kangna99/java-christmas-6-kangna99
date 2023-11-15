@@ -122,10 +122,10 @@
 
 ## 프로그래밍 요구 사항
 
-- [ ] indent depth는 2까지만 허용
-- [ ] 3항 연산자 사용 금지
-- [ ] 함수가 15라인을 넘어가지 않도록 구현
-- [ ] JUnit 5, AssertJ를 활용해 테스트 코드 작성
-- [ ] else 예약어 사용 금지
-- [ ] switch-case 사용 금지
-- [ ] `InputView`, `OutputView` 클래스를 활용해 입력과 출력을 담당하는 클래스를 별도로 구현
+- [x] indent depth는 2까지만 허용
+- [x] 3항 연산자 사용 금지
+- [x] 함수가 15라인을 넘어가지 않도록 구현
+- [x] JUnit 5, AssertJ를 활용해 테스트 코드 작성
+- [x] else 예약어 사용 금지
+- [x] switch-case 사용 금지
+- [x] `InputView`, `OutputView` 클래스를 활용해 입력과 출력을 담당하는 클래스를 별도로 구현

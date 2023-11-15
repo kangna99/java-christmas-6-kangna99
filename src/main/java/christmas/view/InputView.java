@@ -60,15 +60,16 @@ public class InputView {
         return orderDetails;
     }
 
-    private void validateDate(String date) {
+    public void validateDate(String date) {
         validateNotBlank(date);
         validateInputIsNumeric(date);
         validateInputIsWithinRange(date);
     }
 
-    private void validateOrder(String order) {
+    public void validateOrder(String order) {
         validateNotBlank(order);
         validateFormat(order);
+        validateNotEndWithDelimiter(order);
     }
 
     private void validateNotBlank(String input) {
@@ -99,10 +100,16 @@ public class InputView {
     }
 
     private void validateFormat(String order) {
-        String regex = "([가-힣]+)-(\\d+)(,|$)";
+        String regex = "(?:[가-힣]+-\\d+)(?:,[가-힣]+-\\d+)*(?:,[가-힣]+-\\d+)?";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(order);
-        if (!matcher.find()) {
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException(formatErrorWithRetry(INVALID_ORDER_FORMAT));
+        }
+    }
+
+    private void validateNotEndWithDelimiter(String input) {
+        if (input.endsWith(COMMA_DELIMITER)) {
             throw new IllegalArgumentException(formatErrorWithRetry(INVALID_ORDER_FORMAT));
         }
     }

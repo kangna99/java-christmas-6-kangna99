@@ -9,11 +9,12 @@ import christmas.menu.Category;
 import christmas.menu.Menu;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class OrderDetails {
+public class OrderDetails implements Iterable<Order> {
     private static final int DEFAULT_COUNT = 0;
     private static final int MAXIMUM_ORDER_COUNT = 20;
     private final List<Order> orderDetails;
@@ -87,15 +88,20 @@ public class OrderDetails {
                 .sum();
     }
 
-    public List<Order> getOrderDetails() {
-        return orderDetails;
-    }
-
     public int getDessertCount() {
         return menuCountForEachCategory.get(Category.DESSERT);
     }
 
     public int getMainDishCount() {
         return menuCountForEachCategory.get(Category.MAIN_DISH);
+    }
+
+    @Override
+    public Iterator<Order> iterator() {
+        return orderDetails.iterator();
+    }
+
+    public int size() {
+        return orderDetails.size();
     }
 }

@@ -27,7 +27,7 @@ public class OutputView {
 
     public void printOrderDetails(OrderDetails orderDetails) {
         System.out.println(ORDERED_MENU);
-        for (Order order : orderDetails.getOrderDetails()) {
+        for (Order order : orderDetails) {
             System.out.println(order.getName() + " " + order.getCount() + "개");
         }
         System.out.println();

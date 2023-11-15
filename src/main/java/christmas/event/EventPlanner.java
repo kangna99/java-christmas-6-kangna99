@@ -8,9 +8,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class EventPlanner {
-    public GiveawayEvent giveawayEvent;
-    private List<DiscountEvent> discountEvents;
-    private Customer customer;
+    public final GiveawayEvent giveawayEvent;
+    private final Customer customer;
+    private final List<DiscountEvent> discountEvents;
 
     public EventPlanner(Customer customer) {
         this.customer = customer;

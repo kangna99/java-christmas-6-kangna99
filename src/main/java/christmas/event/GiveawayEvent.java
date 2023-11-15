@@ -10,12 +10,12 @@ import java.util.Map;
 public class GiveawayEvent {
     private static final int MINIMUM_APPLICABLE_AMOUNT = 120_000;
 
-    private boolean isApplicable(Customer customer) {
-        return customer.getOrderDetails().calculateTotalPrice() >= MINIMUM_APPLICABLE_AMOUNT;
+    private boolean isApplicable(int totalPrice) {
+        return totalPrice >= MINIMUM_APPLICABLE_AMOUNT;
     }
 
-    public int calculateBenefitAmount(Customer customer) {
-        if (isApplicable(customer)) {
+    public int calculateBenefitAmount(int totalPrice) {
+        if (isApplicable(totalPrice)) {
             return item().getPrice();
         }
         return 0;
@@ -33,8 +33,8 @@ public class GiveawayEvent {
         return 1;
     }
 
-    public Map<Menu, Integer> giveaway(Customer customer) {
-        if (isApplicable(customer)) {
+    public Map<Menu, Integer> giveaway(int totalPrice) {
+        if (isApplicable(totalPrice)) {
             Map<Menu, Integer> giveawayMap = new HashMap<>();
             giveawayMap.put(item(), itemCount());
             return giveawayMap;

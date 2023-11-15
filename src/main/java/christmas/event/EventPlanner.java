@@ -43,11 +43,11 @@ public class EventPlanner {
     }
 
     private int getTotalGiveawayPrice() {
-        return giveawayEvent.calculateBenefitAmount(customer);
+        return giveawayEvent.calculateBenefitAmount(customer.getOrderDetails().calculateTotalPrice());
     }
 
     public String getGiveaway(Customer customer) {
-        Map<Menu, Integer> giveaway = giveawayEvent.giveaway(customer);
+        Map<Menu, Integer> giveaway = giveawayEvent.giveaway(customer.getOrderDetails().calculateTotalPrice());
 
         if (giveaway.isEmpty()) {
             return "없음\n";
@@ -73,7 +73,7 @@ public class EventPlanner {
     }
 
     public String getGiveawayDetails() {
-        Map<Menu, Integer> giveaway = giveawayEvent.giveaway(customer);
+        Map<Menu, Integer> giveaway = giveawayEvent.giveaway(customer.getOrderDetails().calculateTotalPrice());
         if (giveaway.isEmpty()) {
             return "";
         }

@@ -21,7 +21,7 @@ public class EventPlanner {
         this.giveawayEvent = new GiveawayEvent();
     }
 
-    public Map<DiscountEvent, Integer> getDiscountAmounts() {
+    private Map<DiscountEvent, Integer> getDiscountAmounts() {
         return discountEvents.stream()
                 .filter(discountEvent -> discountEvent.isApplicable(customer.getTotalPrice(), customer.getVisitDate()))
                 .collect(Collectors.toMap(

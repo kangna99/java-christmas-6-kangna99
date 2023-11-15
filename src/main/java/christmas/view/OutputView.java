@@ -1,6 +1,7 @@
 package christmas.view;
 
 import static christmas.constants.GuideMessage.EVENT_MESSAGE;
+import static christmas.constants.GuideMessage.START_MESSAGE;
 import static christmas.constants.ResultMessage.BENEFIT_DETAILS;
 import static christmas.constants.ResultMessage.DECEMBER_EVENT_BADGE;
 import static christmas.constants.ResultMessage.GIVEAWAY_MENU;
@@ -14,7 +15,11 @@ import christmas.order.Order;
 import christmas.order.OrderDetails;
 
 public class OutputView {
-    public void printDetails(int visitDate) {
+    public void printStartMessage() {
+        System.out.println(START_MESSAGE);
+    }
+
+    public void printPreviewDetails(int visitDate) {
         System.out.printf(EVENT_MESSAGE, visitDate);
         System.out.println();
         System.out.println();

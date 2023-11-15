@@ -14,6 +14,8 @@ import java.util.Map;
 import java.util.Set;
 
 public class OrderDetails {
+    private static final int DEFAULT_COUNT = 0;
+    private static final int MAXIMUM_ORDER_COUNT = 20;
     private final List<Order> orderDetails;
     Map<Category, Integer> menuCountForEachCategory;
 
@@ -39,7 +41,7 @@ public class OrderDetails {
     }
 
     private void validateOrderQuantity() {
-        if (calculateTotalCount() > 20) {
+        if (calculateTotalCount() > MAXIMUM_ORDER_COUNT) {
             throw new IllegalArgumentException(formatErrorWithRetry(NOT_ALLOWED_OVER_MENU_COUNT));
         }
     }
@@ -57,7 +59,7 @@ public class OrderDetails {
     private void initCategoryCount() {
         menuCountForEachCategory = new HashMap<>();
         for (Category category : Category.values()) {
-            menuCountForEachCategory.put(category, 0);
+            menuCountForEachCategory.put(category, DEFAULT_COUNT);
         }
     }
 
@@ -75,7 +77,7 @@ public class OrderDetails {
     private void accumulateCategoryCount(Order order) {
         Menu menu = Menu.called(order.getName());
         Category category = menu.getCategory();
-        int currentCount = menuCountForEachCategory.getOrDefault(category, 0);
+        int currentCount = menuCountForEachCategory.getOrDefault(category, DEFAULT_COUNT);
         menuCountForEachCategory.put(category, currentCount + order.getCount());
     }
 

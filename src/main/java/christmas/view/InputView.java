@@ -1,9 +1,10 @@
 package christmas.view;
 
+import static christmas.constants.Constant.WHITESPACE_REGEX;
 import static christmas.constants.ErrorMessage.CONTAINS_WHITESPACE;
+import static christmas.constants.ErrorMessage.DATE_NOT_NUMBER;
 import static christmas.constants.ErrorMessage.INVALID_DATE;
 import static christmas.constants.ErrorMessage.INVALID_ORDER_FORMAT;
-import static christmas.constants.ErrorMessage.NOT_NUMBER;
 import static christmas.constants.ErrorMessage.formatErrorWithRetry;
 import static christmas.constants.GuideMessage.REQUEST_DATE;
 import static christmas.constants.GuideMessage.REQUEST_ORDER;
@@ -17,7 +18,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InputView {
-    private static final String WHITESPACE_REGEX = "\\s";
+    private static final int MINIMUM_DECEMBER_DATE = 1;
+    private static final int MAXIMUM_DECEMBER_DATE = 31;
+    private static final String COMMA_DELIMITER = ",";
+    private static final String HYPHEN_DELIMITER = "-";
 
     public int readDate() {
         while (true) {
@@ -38,10 +42,10 @@ public class InputView {
             String input = Console.readLine();
             try {
                 validateOrder(input);
-                List<String> orders = List.of(input.split(","));
+                List<String> orders = List.of(input.split(COMMA_DELIMITER));
                 List<Order> orderDetails = new ArrayList<>();
                 orders.forEach(order -> {
-                    List<String> menuDetails = List.of(order.split("-"));
+                    List<String> menuDetails = List.of(order.split(HYPHEN_DELIMITER));
                     orderDetails.add(new Order(menuDetails.get(0), menuDetails.get(1)));
                 });
                 return new OrderDetails(orderDetails);
@@ -78,20 +82,14 @@ public class InputView {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(formatErrorWithRetry(NOT_NUMBER));
+            throw new IllegalArgumentException(formatErrorWithRetry(DATE_NOT_NUMBER));
         }
     }
 
     private void validateInputIsWithinRange(String input) {
         int date = Integer.parseInt(input);
-        if (date < 1 || date > 31) {
+        if (date < MINIMUM_DECEMBER_DATE || date > MAXIMUM_DECEMBER_DATE) {
             throw new IllegalArgumentException(formatErrorWithRetry(INVALID_DATE));
-        }
-    }
-
-    private void validateNotEndsWithDelimiter(String input) {
-        if (input.endsWith(",")) {
-            throw new IllegalArgumentException(formatErrorWithRetry(INVALID_ORDER_FORMAT));
         }
     }
 

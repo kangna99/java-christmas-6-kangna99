@@ -1,9 +1,10 @@
 package christmas.order;
 
+import static christmas.constants.Constant.WHITESPACE_REGEX;
 import static christmas.constants.ErrorMessage.CONTAINS_WHITESPACE;
 import static christmas.constants.ErrorMessage.INVALID_ORDER_MENU_COUNT;
 import static christmas.constants.ErrorMessage.INVALID_ORDER_MENU_NAME;
-import static christmas.constants.ErrorMessage.NOT_NUMBER;
+import static christmas.constants.ErrorMessage.ORDER_COUNT_NOT_NUMBER;
 import static christmas.constants.ErrorMessage.formatErrorWithRetry;
 
 import christmas.menu.Menu;
@@ -11,7 +12,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Order {
-    private static final String WHITESPACE_REGEX = "\\s";
     private static final int MINIMUM_ORDER_COUNT = 1;
     private static final int MAXIMUM_ORDER_COUNT = 20;
     private String menuName;
@@ -51,7 +51,7 @@ public class Order {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(formatErrorWithRetry(NOT_NUMBER));
+            throw new IllegalArgumentException(formatErrorWithRetry(ORDER_COUNT_NOT_NUMBER));
         }
     }
 

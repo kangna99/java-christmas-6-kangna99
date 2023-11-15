@@ -1,7 +1,5 @@
 package christmas;
 
-import static christmas.constants.GuideMessage.START_MESSAGE;
-
 import christmas.order.OrderDetails;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -20,11 +18,11 @@ public class Controller {
     }
 
     public void run() {
-        System.out.println(START_MESSAGE);
+        outputView.printStartMessage();
         int visitDate = inputView.readDate();
         OrderDetails orderDetails = inputView.readOrder();
         customer.makeOrder(visitDate, orderDetails);
-        outputView.printDetails(visitDate);
+        outputView.printPreviewDetails(visitDate);
         outputView.printOrder(customer.getOrderDetails());
         outputView.printTotalPriceBeforeDiscount(customer.getOrderDetails());
         outputView.printGiveAwayMenu(eventPlanner.getGiveaway(customer));

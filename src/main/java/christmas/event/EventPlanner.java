@@ -1,8 +1,6 @@
 package christmas.event;
 
 import christmas.menu.Menu;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -14,30 +12,26 @@ public class EventPlanner {
 
     public EventPlanner(Customer customer) {
         this.customer = customer;
-        this.discountEvents = new ArrayList<>();
-        discountEvents.add(new ChristmasDDayDiscountEvent());
-        discountEvents.add(new WeekdayDiscountEvent());
-        discountEvents.add(new WeekendDiscountEvent());
-        discountEvents.add(new SpecialDiscountEvent());
+        this.discountEvents = List.of(
+                new ChristmasDDayDiscountEvent(),
+                new WeekdayDiscountEvent(),
+                new WeekendDiscountEvent(),
+                new SpecialDiscountEvent()
+        );
         this.giveawayEvent = new GiveawayEvent();
     }
 
     public Map<DiscountEvent, Integer> getDiscountAmounts() {
-        Map<DiscountEvent, Integer> discountAmounts = new HashMap<>();
-
-        for (DiscountEvent discountEvent : discountEvents) {
-            if (discountEvent.isApplicable(customer.getTotalPrice(), customer.getVisitDate())) {
-                int discountAmount = discountEvent.calculateDiscount(customer);
-                discountAmounts.put(discountEvent, discountAmount);
-            }
-        }
-
-        return discountAmounts;
+        return discountEvents.stream()
+                .filter(discountEvent -> discountEvent.isApplicable(customer.getTotalPrice(), customer.getVisitDate()))
+                .collect(Collectors.toMap(
+                        discountEvent -> discountEvent,
+                        discountEvent -> discountEvent.calculateDiscount(customer)
+                ));
     }
 
-    private int getTotalDisCounts() {
-        Map<DiscountEvent, Integer> discountAmounts = getDiscountAmounts();
-        return discountAmounts.values().stream()
+    private int getTotalDiscounts() {
+        return getDiscountAmounts().values().stream()
                 .mapToInt(Integer::intValue)
                 .sum();
     }
@@ -58,26 +52,24 @@ public class EventPlanner {
     }
 
     public int getTotalBenefitPrice() {
-        return getTotalDisCounts() + getTotalGiveawayPrice();
+        return getTotalDiscounts() + getTotalGiveawayPrice();
     }
 
     public int getTotalPriceAfterDiscount() {
-        return customer.getTotalPrice() - getTotalDisCounts();
+        return customer.getTotalPrice() - getTotalDiscounts();
     }
 
     public String getDiscountDetails() {
-        Map<DiscountEvent, Integer> discountAmounts = getDiscountAmounts();
-        return discountAmounts.entrySet().stream()
+        return getDiscountAmounts().entrySet().stream()
                 .map(entry -> String.format("%s: -%,d원", entry.getKey().name(), entry.getValue()))
-                .collect(Collectors.joining("\n", "", ""));
+                .collect(Collectors.joining("\n"));
     }
 
     public String getGiveawayDetails() {
-        Map<Menu, Integer> giveaway = giveawayEvent.giveaway(customer.getTotalPrice());
-        if (giveaway.isEmpty()) {
-            return "";
+        if (getTotalGiveawayPrice() > 0) {
+            return String.format("%s: -%,d원\n", giveawayEvent.eventName(), getTotalGiveawayPrice());
         }
-        return String.format("%s: -%,d원\n", giveawayEvent.eventName(), giveawayEvent.item().getPrice());
+        return "";
     }
 
     public Badge awardBadge() {

@@ -56,7 +56,7 @@ public class OutputView {
 
     public void printTotalBenefitPrice(int price) {
         System.out.println(TOTAL_BENEFIT_PRICE);
-        if (price != 0) {
+        if (price > 0) {
             System.out.printf("-%,d원\n", price);
             System.out.println();
             return;

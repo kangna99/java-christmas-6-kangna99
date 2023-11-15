@@ -25,7 +25,7 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printOrder(OrderDetails orderDetails) {
+    public void printOrderDetails(OrderDetails orderDetails) {
         System.out.println(ORDERED_MENU);
         for (Order order : orderDetails.getOrderDetails()) {
             System.out.println(order.getName() + " " + order.getCount() + "개");
@@ -33,9 +33,9 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printTotalPriceBeforeDiscount(OrderDetails orderDetails) {
+    public void printTotalPriceBeforeDiscount(int totalPrice) {
         System.out.println(TOTAL_PRICE_BEFORE_DISCOUNT);
-        System.out.printf("%,d원\n", orderDetails.calculateTotalPrice());
+        System.out.printf("%,d원\n", totalPrice);
         System.out.println();
     }
 

@@ -26,7 +26,7 @@ public class EventPlanner {
         Map<DiscountEvent, Integer> discountAmounts = new HashMap<>();
 
         for (DiscountEvent discountEvent : discountEvents) {
-            if (discountEvent.isApplicable(customer.getOrderDetails().calculateTotalPrice(), customer.getVisitDate())) {
+            if (discountEvent.isApplicable(customer.getTotalPrice(), customer.getVisitDate())) {
                 int discountAmount = discountEvent.calculateDiscount(customer);
                 discountAmounts.put(discountEvent, discountAmount);
             }
@@ -43,11 +43,11 @@ public class EventPlanner {
     }
 
     private int getTotalGiveawayPrice() {
-        return giveawayEvent.calculateBenefitAmount(customer.getOrderDetails().calculateTotalPrice());
+        return giveawayEvent.calculateBenefitAmount(customer.getTotalPrice());
     }
 
     public String getGiveaway(Customer customer) {
-        Map<Menu, Integer> giveaway = giveawayEvent.giveaway(customer.getOrderDetails().calculateTotalPrice());
+        Map<Menu, Integer> giveaway = giveawayEvent.giveaway(customer.getTotalPrice());
 
         if (giveaway.isEmpty()) {
             return "없음\n";
@@ -62,7 +62,7 @@ public class EventPlanner {
     }
 
     public int getTotalPriceAfterDiscount() {
-        return customer.getOrderDetails().calculateTotalPrice() - getTotalDisCounts();
+        return customer.getTotalPrice() - getTotalDisCounts();
     }
 
     public String getDiscountDetails() {
@@ -73,7 +73,7 @@ public class EventPlanner {
     }
 
     public String getGiveawayDetails() {
-        Map<Menu, Integer> giveaway = giveawayEvent.giveaway(customer.getOrderDetails().calculateTotalPrice());
+        Map<Menu, Integer> giveaway = giveawayEvent.giveaway(customer.getTotalPrice());
         if (giveaway.isEmpty()) {
             return "";
         }

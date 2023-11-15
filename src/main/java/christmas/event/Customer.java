@@ -18,4 +18,8 @@ public class Customer {
     public OrderDetails getOrderDetails() {
         return orderDetails;
     }
+
+    public int getTotalPrice() {
+        return orderDetails.calculateTotalPrice();
+    }
 }

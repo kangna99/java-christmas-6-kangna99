@@ -17,13 +17,12 @@ public class Controller {
     public void run() {
         outputView.printStartMessage();
 
-        int visitDate = inputView.readDate();
-        Customer customer = new Customer(visitDate, inputView.readOrder());
+        Customer customer = new Customer(inputView.readDate(), inputView.readOrder());
         EventPlanner eventPlanner = new EventPlanner(customer);
 
-        outputView.printPreviewDetails(visitDate);
-        outputView.printOrder(customer.getOrderDetails());
-        outputView.printTotalPriceBeforeDiscount(customer.getOrderDetails());
+        outputView.printPreviewDetails(customer.getVisitDate());
+        outputView.printOrderDetails(customer.getOrderDetails());
+        outputView.printTotalPriceBeforeDiscount(customer.getTotalPrice());
         outputView.printGiveAwayMenu(eventPlanner.getGiveaway(customer));
         outputView.printBenefitDetails(eventPlanner.getDiscountDetails(), eventPlanner.getGiveawayDetails());
         outputView.printTotalBenefitPrice(eventPlanner.getTotalBenefitPrice());

@@ -1,7 +1,5 @@
 package christmas.event;
 
-import christmas.Customer;
-
 public interface DiscountEvent {
     int MINIMUM_APPLICABLE_AMOUNT = 10_000;
 

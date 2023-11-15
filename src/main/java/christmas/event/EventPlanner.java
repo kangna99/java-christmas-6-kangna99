@@ -1,12 +1,5 @@
-package christmas;
+package christmas.event;
 
-import christmas.event.Badge;
-import christmas.event.ChristmasDDayDiscountEvent;
-import christmas.event.DiscountEvent;
-import christmas.event.GiveawayEvent;
-import christmas.event.SpecialDiscountEvent;
-import christmas.event.WeekdayDiscountEvent;
-import christmas.event.WeekendDiscountEvent;
 import christmas.menu.Menu;
 import java.util.ArrayList;
 import java.util.HashMap;

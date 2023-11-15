@@ -1,7 +1,7 @@
 package christmas.controller;
 
-import christmas.Customer;
-import christmas.EventPlanner;
+import christmas.event.Customer;
+import christmas.event.EventPlanner;
 import christmas.order.OrderDetails;
 import christmas.view.InputView;
 import christmas.view.OutputView;

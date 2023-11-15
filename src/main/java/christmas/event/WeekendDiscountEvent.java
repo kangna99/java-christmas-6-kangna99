@@ -1,6 +1,5 @@
 package christmas.event;
 
-import christmas.Customer;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 

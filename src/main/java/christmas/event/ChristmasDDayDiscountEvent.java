@@ -1,7 +1,5 @@
 package christmas.event;
 
-import christmas.Customer;
-
 public class ChristmasDDayDiscountEvent implements DiscountEvent {
     private static final int INITIAL_DISCOUNT = 1_000;
     private static final int DAILY_INCREASE_AMOUNT = 100;

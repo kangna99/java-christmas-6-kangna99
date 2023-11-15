@@ -1,4 +1,4 @@
-package christmas;
+package christmas.event;
 
 import christmas.order.OrderDetails;
 

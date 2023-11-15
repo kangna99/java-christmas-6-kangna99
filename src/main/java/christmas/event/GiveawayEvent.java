@@ -2,7 +2,6 @@ package christmas.event;
 
 import static christmas.menu.Menu.CHAMPAGNE;
 
-import christmas.Customer;
 import christmas.menu.Menu;
 import java.util.Collections;
 import java.util.HashMap;

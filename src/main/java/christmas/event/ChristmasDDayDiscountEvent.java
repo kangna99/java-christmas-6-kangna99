@@ -7,12 +7,7 @@ public class ChristmasDDayDiscountEvent implements DiscountEvent {
     private static final int END_DAY = 25;
 
     @Override
-    public boolean isApplicable(Customer customer) {
-        return DiscountEvent.super.isApplicable(customer) && additionalCondition(customer);
-    }
-
-    private boolean additionalCondition(Customer customer) {
-        int visitDate = customer.getVisitDate();
+    public boolean isApplicableDay(int visitDate) {
         return visitDate >= START_DAY && visitDate <= END_DAY;
     }
 

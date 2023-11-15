@@ -2,28 +2,25 @@ package christmas.controller;
 
 import christmas.event.Customer;
 import christmas.event.EventPlanner;
-import christmas.order.OrderDetails;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
 public class Controller {
     private final InputView inputView;
     private final OutputView outputView;
-    private final Customer customer;
-    private final EventPlanner eventPlanner;
 
     public Controller(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
-        customer = new Customer();
-        eventPlanner = new EventPlanner(customer);
     }
 
     public void run() {
         outputView.printStartMessage();
+
         int visitDate = inputView.readDate();
-        OrderDetails orderDetails = inputView.readOrder();
-        customer.makeOrder(visitDate, orderDetails);
+        Customer customer = new Customer(visitDate, inputView.readOrder());
+        EventPlanner eventPlanner = new EventPlanner(customer);
+
         outputView.printPreviewDetails(visitDate);
         outputView.printOrder(customer.getOrderDetails());
         outputView.printTotalPriceBeforeDiscount(customer.getOrderDetails());

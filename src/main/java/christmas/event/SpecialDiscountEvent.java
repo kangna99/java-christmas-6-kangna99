@@ -4,14 +4,9 @@ public class SpecialDiscountEvent implements DiscountEvent {
     private static final int DISCOUNT_AMOUNT = 1_000;
 
     @Override
-    public boolean isApplicable(Customer customer) {
-        return DiscountEvent.super.isApplicable(customer) && additionalCondition(customer);
-    }
-
-    private boolean additionalCondition(Customer customer) {
-        int dayOfMonth = customer.getVisitDate();
-        return dayOfMonth == 3 || dayOfMonth == 10 || dayOfMonth == 17 || dayOfMonth == 24 || dayOfMonth == 25
-                || dayOfMonth == 31;
+    public boolean isApplicableDay(int visitDate) {
+        return visitDate == 3 || visitDate == 10 || visitDate == 17 || visitDate == 24 || visitDate == 25
+                || visitDate == 31;
     }
 
     @Override

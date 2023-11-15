@@ -26,7 +26,7 @@ public class EventPlanner {
         Map<DiscountEvent, Integer> discountAmounts = new HashMap<>();
 
         for (DiscountEvent discountEvent : discountEvents) {
-            if (discountEvent.isApplicable(customer)) {
+            if (discountEvent.isApplicable(customer.getOrderDetails().calculateTotalPrice(), customer.getVisitDate())) {
                 int discountAmount = discountEvent.calculateDiscount(customer);
                 discountAmounts.put(discountEvent, discountAmount);
             }

@@ -6,8 +6,8 @@ public class Customer {
     private int visitDate;
     private OrderDetails orderDetails;
 
-    public void makeOrder(int date, OrderDetails orderDetails) {
-        this.visitDate = date;
+    public Customer(int visitDate, OrderDetails orderDetails) {
+        this.visitDate = visitDate;
         this.orderDetails = orderDetails;
     }
 

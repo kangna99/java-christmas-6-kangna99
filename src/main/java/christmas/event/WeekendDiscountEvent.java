@@ -7,12 +7,8 @@ public class WeekendDiscountEvent implements DiscountEvent {
     private static final int DISCOUNT_AMOUNT_PER_MAIN_DISH = 2_023;
 
     @Override
-    public boolean isApplicable(Customer customer) {
-        return DiscountEvent.super.isApplicable(customer) && additionalCondition(customer);
-    }
-
-    public boolean additionalCondition(Customer customer) {
-        LocalDate date = LocalDate.of(2023, 12, customer.getVisitDate());
+    public boolean isApplicableDay(int visitDate) {
+        LocalDate date = LocalDate.of(2023, 12, visitDate);
         return date.getDayOfWeek() == DayOfWeek.FRIDAY || date.getDayOfWeek() == DayOfWeek.SATURDAY;
     }
 

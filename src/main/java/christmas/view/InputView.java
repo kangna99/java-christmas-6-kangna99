@@ -42,17 +42,22 @@ public class InputView {
             String input = Console.readLine();
             try {
                 validateOrder(input);
-                List<String> orders = List.of(input.split(COMMA_DELIMITER));
-                List<Order> orderDetails = new ArrayList<>();
-                orders.forEach(order -> {
-                    List<String> menuDetails = List.of(order.split(HYPHEN_DELIMITER));
-                    orderDetails.add(new Order(menuDetails.get(0), menuDetails.get(1)));
-                });
+                List<Order> orderDetails = createOrderDetails(input);
                 return new OrderDetails(orderDetails);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    private List<Order> createOrderDetails(String input) {
+        List<String> orders = List.of(input.split(COMMA_DELIMITER));
+        List<Order> orderDetails = new ArrayList<>();
+        orders.forEach(order -> {
+            List<String> menuDetails = List.of(order.split(HYPHEN_DELIMITER));
+            orderDetails.add(new Order(menuDetails.get(0), menuDetails.get(1)));
+        });
+        return orderDetails;
     }
 
     private void validateDate(String date) {

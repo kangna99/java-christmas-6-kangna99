@@ -1,6 +1,5 @@
 package christmas.view;
 
-import static christmas.constants.Constant.WHITESPACE_REGEX;
 import static christmas.constants.ErrorMessage.CONTAINS_WHITESPACE;
 import static christmas.constants.ErrorMessage.DATE_NOT_NUMBER;
 import static christmas.constants.ErrorMessage.INVALID_DATE;
@@ -20,6 +19,7 @@ import java.util.regex.Pattern;
 public class InputView {
     private static final int MINIMUM_DECEMBER_DATE = 1;
     private static final int MAXIMUM_DECEMBER_DATE = 31;
+    private static final String WHITESPACE_REGEX = "\\s";
     private static final String COMMA_DELIMITER = ",";
     private static final String HYPHEN_DELIMITER = "-";
 

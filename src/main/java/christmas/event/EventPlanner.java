@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class EventPlanner {
-    public final GiveawayEvent giveawayEvent;
+    private final GiveawayEvent giveawayEvent;
     private final Customer customer;
     private final List<DiscountEvent> discountEvents;
 
@@ -67,7 +67,7 @@ public class EventPlanner {
 
     public String getGiveawayDetails() {
         if (getTotalGiveawayPrice() > 0) {
-            return String.format("%s: -%,d원\n", giveawayEvent.eventName(), getTotalGiveawayPrice());
+            return String.format("%s: -%,d원%n", giveawayEvent.eventName(), getTotalGiveawayPrice());
         }
         return "";
     }

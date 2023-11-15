@@ -9,6 +9,7 @@ import java.util.Map;
 
 public class GiveawayEvent {
     private static final int MINIMUM_APPLICABLE_AMOUNT = 120_000;
+    private static final int GIVEAWAY_COUNT = 1;
 
     private boolean isApplicable(int totalPrice) {
         return totalPrice >= MINIMUM_APPLICABLE_AMOUNT;
@@ -30,7 +31,7 @@ public class GiveawayEvent {
     }
 
     public int itemCount() {
-        return 1;
+        return GIVEAWAY_COUNT;
     }
 
     public Map<Menu, Integer> giveaway(int totalPrice) {

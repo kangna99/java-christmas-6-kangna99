@@ -1,6 +1,5 @@
 package christmas.order;
 
-import static christmas.constants.Constant.WHITESPACE_REGEX;
 import static christmas.constants.ErrorMessage.CONTAINS_WHITESPACE;
 import static christmas.constants.ErrorMessage.INVALID_ORDER_MENU_COUNT;
 import static christmas.constants.ErrorMessage.INVALID_ORDER_MENU_NAME;
@@ -14,6 +13,7 @@ import java.util.regex.Pattern;
 public class Order {
     private static final int MINIMUM_ORDER_COUNT = 1;
     private static final int MAXIMUM_ORDER_COUNT = 20;
+    private static final String WHITESPACE_REGEX = "\\s";
     private String menuName;
     private int count;
 

@@ -35,7 +35,7 @@ public class OutputView {
 
     public void printTotalPriceBeforeDiscount(int totalPrice) {
         System.out.println(TOTAL_PRICE_BEFORE_DISCOUNT);
-        System.out.printf("%,d원\n", totalPrice);
+        System.out.printf("%,d원%n", totalPrice);
         System.out.println();
     }
 
@@ -57,17 +57,17 @@ public class OutputView {
     public void printTotalBenefitPrice(int price) {
         System.out.println(TOTAL_BENEFIT_PRICE);
         if (price > 0) {
-            System.out.printf("-%,d원\n", price);
+            System.out.printf("-%,d원%n", price);
             System.out.println();
             return;
         }
-        System.out.printf("%,d원\n", price);
+        System.out.printf("%,d원%n", price);
         System.out.println();
     }
 
     public void printTotalPriceAfterDiscount(int price) {
         System.out.println(TOTAL_PRICE_AFTER_DISCOUNT);
-        System.out.printf("%,d원\n", price);
+        System.out.printf("%,d원%n", price);
         System.out.println();
     }
 

@@ -18,7 +18,7 @@ public class OrderDetails implements Iterable<Order> {
     private static final int DEFAULT_COUNT = 0;
     private static final int MAXIMUM_ORDER_COUNT = 20;
     private final List<Order> orderDetails;
-    Map<Category, Integer> menuCountForEachCategory;
+    private Map<Category, Integer> menuCountForEachCategory;
 
     public OrderDetails(List<Order> orderDetails) {
         this.orderDetails = orderDetails;
